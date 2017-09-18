@@ -1,0 +1,17 @@
+machine:
+  node:
+    version: 6.9.4
+  services:
+    - postgresql
+
+database:
+  override:
+    - createdb app-usage-analytics-test
+    - npm run migrate
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - ./script/heroku_deploy.sh app-usage-server:
+          timeout: 300
